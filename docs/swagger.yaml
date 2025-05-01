@@ -1,0 +1,87 @@
+basePath: /v1
+definitions:
+  pet.Pet:
+    properties:
+      ascii:
+        example: (=^･ω･^=)
+        type: string
+      description:
+        example: Милый котик
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: voronkovworkemail@gmail.com
+    name: Andrew
+    url: https://t.me/voronkov44
+  description: REST API для работы с pet ascii картинками
+  title: Pet API
+  version: "1.0"
+paths:
+  /v1/pet:
+    delete:
+      description: Удаляет pet файл
+      produces:
+      - text/plain
+      responses:
+        "204":
+          description: No Content
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Удалить pet
+      tags:
+      - pet
+    get:
+      description: Возвращает сохранённый pet в формате JSON
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "204":
+          description: No Content
+          schema:
+            type: string
+      summary: Получить pet
+      tags:
+      - pet
+    put:
+      consumes:
+      - application/json
+      description: Загружает новый pet в формате JSON. Валидируются поля ascii и description
+      parameters:
+      - description: Pet данные
+        in: body
+        name: pet
+        required: true
+        schema:
+          $ref: '#/definitions/pet.Pet'
+      produces:
+      - text/plain
+      responses:
+        "200":
+          description: pet updated successfully
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Обновить pet
+      tags:
+      - pet
+schemes:
+- http
+swagger: "2.0"

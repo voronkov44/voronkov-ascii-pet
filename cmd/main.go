@@ -1,9 +1,23 @@
+// @title        Pet API
+// @version      1.0
+// @description  REST API для работы с pet ascii картинками
+// @host         localhost:8080
+// @BasePath     /v1
+// @schemes      http
+// @contact.name   Andrew
+// @contact.url    https://t.me/voronkov44
+// @contact.email  voronkovworkemail@gmail.com
+
 package main
 
 import (
+	httpSwagger "github.com/swaggo/http-swagger"
 	"log"
 	"net/http"
 	"os"
+
+	_ "voronkov-ascii-pet/docs"
+
 	"voronkov-ascii-pet/internal/pet"
 )
 
@@ -17,6 +31,7 @@ func main() {
 	log.SetOutput(logFile)
 
 	router := http.NewServeMux()
+	router.Handle("/swagger/", httpSwagger.WrapHandler)
 	pet.NewPetHandler(router)
 
 	server := http.Server{

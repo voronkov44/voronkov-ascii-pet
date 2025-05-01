@@ -1,0 +1,130 @@
+{
+    "schemes": [
+        "http"
+    ],
+    "swagger": "2.0",
+    "info": {
+        "description": "REST API для работы с pet ascii картинками",
+        "title": "Pet API",
+        "contact": {
+            "name": "Andrew",
+            "url": "https://t.me/voronkov44",
+            "email": "voronkovworkemail@gmail.com"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/v1",
+    "paths": {
+        "/v1/pet": {
+            "get": {
+                "description": "Возвращает сохранённый pet в формате JSON",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "pet"
+                ],
+                "summary": "Получить pet",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    },
+                    "204": {
+                        "description": "No Content",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Загружает новый pet в формате JSON. Валидируются поля ascii и description",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "text/plain"
+                ],
+                "tags": [
+                    "pet"
+                ],
+                "summary": "Обновить pet",
+                "parameters": [
+                    {
+                        "description": "Pet данные",
+                        "name": "pet",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/pet.Pet"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "pet updated successfully",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Удаляет pet файл",
+                "produces": [
+                    "text/plain"
+                ],
+                "tags": [
+                    "pet"
+                ],
+                "summary": "Удалить pet",
+                "responses": {
+                    "204": {
+                        "description": "No Content",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "pet.Pet": {
+            "type": "object",
+            "properties": {
+                "ascii": {
+                    "type": "string",
+                    "example": "(=^･ω･^=)"
+                },
+                "description": {
+                    "type": "string",
+                    "example": "Милый котик"
+                }
+            }
+        }
+    }
+}

@@ -23,6 +23,14 @@ func NewPetHandler(router *http.ServeMux) *PetHandler {
 	return handler
 }
 
+// Get godoc
+// @Summary      Получить pet
+// @Description  Возвращает сохранённый pet в формате JSON
+// @Tags         pet
+// @Produce      json
+// @Success      200  {object}  map[string]interface{}
+// @Failure      204  {string}  string  "No Content"
+// @Router       /v1/pet [get]
 func (handler *PetHandler) Get() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		data, err := ioutil.ReadFile(handler.filePath)
@@ -37,6 +45,17 @@ func (handler *PetHandler) Get() http.HandlerFunc {
 
 }
 
+// Put godoc
+// @Summary      Обновить pet
+// @Description  Загружает новый pet в формате JSON. Валидируются поля ascii и description
+// @Tags         pet
+// @Accept       json
+// @Produce      plain
+// @Param        pet  body      Pet  true  "Pet данные"
+// @Success      200  {string}  string  "pet updated successfully"
+// @Failure      400  {string}  string  "Bad Request"
+// @Failure      500  {string}  string  "Internal Server Error"
+// @Router       /v1/pet [put]
 func (handler *PetHandler) Put() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		// Читаем тело запроса
@@ -101,6 +120,14 @@ func (handler *PetHandler) Put() http.HandlerFunc {
 	}
 }
 
+// Delete godoc
+// @Summary      Удалить pet
+// @Description  Удаляет pet файл
+// @Tags         pet
+// @Produce      plain
+// @Success      204  {string}  string  "No Content"
+// @Failure      500  {string}  string  "Internal Server Error"
+// @Router       /v1/pet [delete]
 func (handler *PetHandler) Delete() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		if _, err := os.Stat(handler.filePath); os.IsNotExist(err) {
