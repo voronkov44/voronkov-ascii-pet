@@ -22,12 +22,6 @@ func NewPetHandler(router *http.ServeMux) *PetHandler {
 	return handler
 }
 
-func writeError(w http.ResponseWriter, status int, message string) {
-	w.Header().Set("Content-Type", "application/json; charset=utf-8")
-	w.WriteHeader(status)
-	json.NewEncoder(w).Encode(ErrorResponse{Error: message})
-}
-
 func (handler *PetHandler) Get() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		data, err := ioutil.ReadFile(handler.filePath)
@@ -37,19 +31,13 @@ func (handler *PetHandler) Get() http.HandlerFunc {
 		}
 		w.Header().Set("Content-Type", "application/json")
 		w.Write(data)
-		log.Println("Get success")
+		log.Println("method GET success")
 	}
 
 }
 
 func (handler *PetHandler) Put() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		// Проверка, что метод действительно PUT
-		if r.Method != "PUT" {
-			http.Error(w, "invalid request method", http.StatusMethodNotAllowed)
-			return
-		}
-
 		// Читаем тело запроса
 		body, err := ioutil.ReadAll(r.Body)
 		if err != nil {
@@ -88,7 +76,7 @@ func (handler *PetHandler) Put() http.HandlerFunc {
 		// Возвращаем успешный ответ
 		w.WriteHeader(http.StatusOK)
 		w.Write([]byte("pet updated successfully"))
-		log.Println("Put success")
+		log.Println("method PUT success")
 	}
 }
 
@@ -99,6 +87,6 @@ func (handler *PetHandler) Delete() http.HandlerFunc {
 			return
 		}
 		w.WriteHeader(http.StatusNoContent)
-		log.Println("Delete success")
+		log.Println("method DELETE success")
 	}
 }
