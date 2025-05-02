@@ -23,3 +23,16 @@
 2025/05/02 01:04:46 Server started at port 8080
 2025/05/02 01:10:54 Server started at port 8080
 2025/05/02 01:16:45 Server started at port 8080
+2025/05/02 19:05:23 Server started at port 8080
+2025/05/02 19:22:52 Server started at port 8080
+2025/05/02 19:23:12 method PUT success
+2025/05/02 20:44:07 Server started at port 8080
+2025/05/02 20:45:06 Server started at port 8080
+2025/05/02 20:45:44 method PUT success
+2025/05/02 20:56:34 Server started at port 8080
+2025/05/02 20:56:40 method GET success
+2025/05/02 20:56:44 method GET success
+2025/05/02 20:57:00 method DELETE success
+2025/05/02 20:57:03 GET error: failed to read pet file: open pet.json: no such file or directory
+2025/05/02 20:57:31 method PUT success
+2025/05/02 20:58:56 method GET success

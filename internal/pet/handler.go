@@ -3,7 +3,6 @@ package pet
 import (
 	"encoding/json"
 	"io"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -33,9 +32,10 @@ func NewPetHandler(router *http.ServeMux) *PetHandler {
 // @Router       /v1/pet [get]
 func (handler *PetHandler) Get() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		data, err := ioutil.ReadFile(handler.filePath)
+		data, err := os.ReadFile(handler.filePath)
 		if err != nil {
 			http.Error(w, "", http.StatusNoContent)
+			log.Printf("GET error: failed to read pet file: %s", err)
 			return
 		}
 		w.Header().Set("Content-Type", "application/json")

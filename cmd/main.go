@@ -36,7 +36,7 @@ func main() {
 
 	server := http.Server{
 		Addr:    ":8080",
-		Handler: router,
+		Handler: pet.CorsMiddleware(router),
 	}
 
 	log.Println("Server started at port 8080")
