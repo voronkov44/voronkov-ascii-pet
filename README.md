@@ -20,7 +20,7 @@ cd voronkov-ascii-pet
 ```
 
 ### 3. Развертывание и запуск API через Docker
-*Требуется установка [docker](https://www.docker.com/products/docker-desktop/), если не установлен, смотрите [зависимости]()*
+*Требуется установка [docker](https://www.docker.com/products/docker-desktop/), если не установлен, смотрите [зависимости](https://github.com/voronkov44/voronkov-ascii-pet/tree/main#%D0%B7%D0%B0%D0%B2%D0%B8%D1%81%D0%B8%D0%BC%D0%BE%D1%81%D1%82%D0%B8)*
 #### Сборка Docker-образа
 ```bash
 docker build -t ascii-pet .
